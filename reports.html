@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config={
+darkMode:'class'
+}
+</script>
+
+</head>
+
+<body class="bg-gray-100">
+
+<div class="flex min-h-screen">
+
+<!-- Sidebar -->
+
+<aside class="w-64 bg-blue-900 text-white hidden md:block">
+
+<div class="text-center text-2xl font-bold py-6 border-b border-blue-700">
+Intern Portal
+</div>
+
+<nav class="mt-6">
+
+<a href="dashboard.html" class="block px-6 py-3 hover:bg-blue-700">🏠 Dashboard</a>
+
+<a href="students.html" class="block px-6 py-3 hover:bg-blue-700">👨‍🎓 Students</a>
+
+<a href="register.html" class="block px-6 py-3 hover:bg-blue-700">📝 Registration</a>
+
+<a href="attendance.html" class="block px-6 py-3 hover:bg-blue-700">📅 Attendance</a>
+
+<a href="reports.html" class="block px-6 py-3 bg-blue-700">📊 Reports</a>
+
+<a href="settings.html" class="block px-6 py-3 hover:bg-blue-700">⚙ Settings</a>
+
+</nav>
+
+</aside>
+
+<!-- Main -->
+
+<main class="flex-1 p-8">
+
+<h1 class="text-4xl font-bold text-blue-900 mb-8">
+Performance Reports
+</h1>
+
+<!-- Cards -->
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+
+<div class="bg-blue-600 text-white rounded-xl p-6 shadow">
+<p>Total Students</p>
+<h2 class="text-4xl font-bold mt-3">250</h2>
+</div>
+
+<div class="bg-green-500 text-white rounded-xl p-6 shadow">
+<p>Average Score</p>
+<h2 class="text-4xl font-bold mt-3">92%</h2>
+</div>
+
+<div class="bg-yellow-500 text-white rounded-xl p-6 shadow">
+<p>Assignments</p>
+<h2 class="text-4xl font-bold mt-3">180</h2>
+</div>
+
+<div class="bg-red-500 text-white rounded-xl p-6 shadow">
+<p>Certificates</p>
+<h2 class="text-4xl font-bold mt-3">95</h2>
+</div>
+
+</div>
+
+<!-- Chart + Top Students -->
+
+<div class="grid lg:grid-cols-2 gap-6 mb-8">
+
+<div class="bg-white rounded-xl shadow p-6">
+
+<h2 class="text-2xl font-bold mb-5">
+Weekly Performance
+</h2>
+
+<div class="h-72 bg-gray-200 rounded-lg flex justify-center items-center text-gray-500 text-xl">
+
+📈 Performance Chart
+
+</div>
+
+</div>
+
+<div class="bg-white rounded-xl shadow p-6">
+
+<h2 class="text-2xl font-bold mb-5">
+Top Performing Students
+</h2>
+
+<ul class="space-y-4">
+
+<li class="flex justify-between">
+<span>Anjali Kumari</span>
+<span class="font-bold text-green-600">98%</span>
+</li>
+
+<li class="flex justify-between">
+<span>Rahul Kumar</span>
+<span class="font-bold text-green-600">96%</span>
+</li>
+
+<li class="flex justify-between">
+<span>Priya Singh</span>
+<span class="font-bold text-green-600">95%</span>
+</li>
+
+<li class="flex justify-between">
+<span>Amit Sharma</span>
+<span class="font-bold text-green-600">94%</span>
+</li>
+
+<li class="flex justify-between">
+<span>Neha Gupta</span>
+<span class="font-bold text-green-600">93%</span>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- Progress Table -->
+
+<div class="bg-white rounded-xl shadow p-6">
+
+<h2 class="text-2xl font-bold mb-6">
+Student Progress
+</h2>
+
+<table class="min-w-full">
+
+<thead class="bg-blue-900 text-white">
+
+<tr>
+
+<th class="py-3">Student</th>
+
+<th>Course</th>
+
+<th>Progress</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr class="border">
+
+<td class="py-4">Anjali Kumari</td>
+
+<td>MCA</td>
+
+<td>
+
+<div class="w-full bg-gray-200 rounded-full h-4">
+
+<div class="bg-green-500 h-4 rounded-full" style="width:95%"></div>
+
+</div>
+
+</td>
+
+</tr>
+
+<tr class="border">
+
+<td class="py-4">Rahul Kumar</td>
+
+<td>BCA</td>
+
+<td>
+
+<div class="w-full bg-gray-200 rounded-full h-4">
+
+<div class="bg-blue-600 h-4 rounded-full" style="width:88%"></div>
+
+</div>
+
+</td>
+
+</tr>
+
+<tr class="border">
+
+<td class="py-4">Priya Singh</td>
+
+<td>B.Tech</td>
+
+<td>
+
+<div class="w-full bg-gray-200 rounded-full h-4">
+
+<div class="bg-yellow-500 h-4 rounded-full" style="width:82%"></div>
+
+</div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</main>
+
+</div>
+
+</body>
+</html>

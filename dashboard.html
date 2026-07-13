@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class"
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100">
+
+<div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-blue-900 text-white hidden md:block">
+
+        <div class="text-center text-2xl font-bold py-6 border-b border-blue-700">
+            Intern Portal
+        </div>
+
+        <nav class="mt-6">
+
+            <a href="dashboard.html" class="block px-6 py-3 hover:bg-blue-700">🏠 Dashboard</a>
+
+            <a href="students.html" class="block px-6 py-3 hover:bg-blue-700">👨‍🎓 Students</a>
+
+            <a href="register.html" class="block px-6 py-3 hover:bg-blue-700">📝 Registration</a>
+
+            <a href="attendance.html" class="block px-6 py-3 hover:bg-blue-700">📅 Attendance</a>
+
+            <a href="tasks.html" class="block px-6 py-3 hover:bg-blue-700">📚 Tasks</a>
+
+            <a href="reports.html" class="block px-6 py-3 hover:bg-blue-700">📈 Reports</a>
+
+            <a href="certificates.html" class="block px-6 py-3 hover:bg-blue-700">🏆 Certificates</a>
+
+            <a href="settings.html" class="block px-6 py-3 hover:bg-blue-700">⚙️ Settings</a>
+
+        </nav>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+
+        <!-- Top Navbar -->
+        <header class="bg-white shadow flex justify-between items-center p-5">
+
+            <h1 class="text-3xl font-bold text-blue-900">
+                Dashboard
+            </h1>
+
+            <div class="flex items-center gap-4">
+
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    class="border rounded-lg px-4 py-2">
+
+                <button class="text-2xl">🔔</button>
+
+                <img src="https://i.pravatar.cc/40"
+                     class="rounded-full">
+
+            </div>
+
+        </header>
+
+        <!-- Dashboard Cards -->
+        <section class="p-8">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <div class="bg-white rounded-xl shadow p-6">
+                    <p class="text-gray-500">Total Students</p>
+                    <h2 class="text-4xl font-bold text-blue-700 mt-3">250</h2>
+                </div>
+
+                <div class="bg-green-500 text-white rounded-xl shadow p-6">
+                    <p>Active Students</p>
+                    <h2 class="text-4xl font-bold mt-3">220</h2>
+                </div>
+
+                <div class="bg-yellow-400 rounded-xl shadow p-6">
+                    <p>Pending Assignments</p>
+                    <h2 class="text-4xl font-bold mt-3">18</h2>
+                </div>
+
+                <div class="bg-red-500 text-white rounded-xl shadow p-6">
+                    <p>Completed Tasks</p>
+                    <h2 class="text-4xl font-bold mt-3">170</h2>
+                </div>
+
+            </div>
+
+            <!-- Second Row -->
+            <div class="grid lg:grid-cols-2 gap-6 mt-8">
+
+                <!-- Performance -->
+                <div class="bg-white rounded-xl shadow p-6">
+
+                    <h2 class="text-2xl font-bold mb-5">
+                        Weekly Performance
+                    </h2>
+
+                    <div class="h-64 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 text-xl">
+                        📈 Performance Chart
+                    </div>
+
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-xl shadow p-6">
+
+                    <h2 class="text-2xl font-bold mb-5">
+                        Recent Activities
+                    </h2>
+
+                    <ul class="space-y-4">
+
+                        <li>✅ Rahul submitted Assignment 5</li>
+
+                        <li>📝 Anjali registered successfully</li>
+
+                        <li>📅 Attendance updated</li>
+
+                        <li>🏆 Certificate Generated</li>
+
+                        <li>📊 Monthly Report Published</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="bg-white rounded-xl shadow mt-8 p-6">
+
+                <h2 class="text-2xl font-bold mb-5">
+                    Quick Actions
+                </h2>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                    <a href="register.html"
+                       class="bg-blue-700 text-white rounded-lg text-center py-4 hover:bg-blue-900">
+                        Register Student
+                    </a>
+
+                    <a href="students.html"
+                       class="bg-green-600 text-white rounded-lg text-center py-4 hover:bg-green-700">
+                        View Students
+                    </a>
+
+                    <a href="attendance.html"
+                       class="bg-yellow-500 rounded-lg text-center py-4 hover:bg-yellow-600">
+                        Attendance
+                    </a>
+
+                    <a href="reports.html"
+                       class="bg-purple-700 text-white rounded-lg text-center py-4 hover:bg-purple-900">
+                        Reports
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
