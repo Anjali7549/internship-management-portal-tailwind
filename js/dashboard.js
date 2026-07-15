@@ -30,8 +30,8 @@ function animateValue(id, start, end, duration) {
     }, step);
 }
 
-animateValue("totalStudents", 0, 250, 1000);
-animateValue("activeStudents", 0, 220, 1000);
+//animateValue("totalStudents", 0, 250, 1000);
+//animateValue("activeStudents", 0, 220, 1000);
 animateValue("pendingAssignments", 0, 18, 1000);
 animateValue("completedTasks", 0, 170, 1000);
 
@@ -81,3 +81,20 @@ bars.forEach(bar => {
     bar.style.height = height + "px";
 
 });
+// ==========================
+// Dashboard Auto Update
+// ==========================
+
+const students = JSON.parse(localStorage.getItem("students")) || [];
+
+// Total Students
+const totalStudents = document.getElementById("totalStudents");
+if (totalStudents) {
+    totalStudents.textContent = students.length;
+}
+
+// Active Students
+const activeStudents = document.getElementById("activeStudents");
+if (activeStudents) {
+    activeStudents.textContent = students.length;
+}

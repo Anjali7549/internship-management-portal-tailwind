@@ -14,14 +14,9 @@ if (studentForm) {
         const email = document.getElementById("studentEmail").value.trim();
         const course = document.getElementById("studentCourse").value;
 
-        if (
-            name === "" ||
-            email === "" ||
-            course === "Select Course"
-        ) {
-            alert("Please fill all required fields.");
-            return;
-        }
+        if (!validateForm(name, email, course)) {
+    return;
+}
 
         const student = {
             name: name,
@@ -33,7 +28,15 @@ if (studentForm) {
 
         students.push(student);
 
-        localStorage.setItem("students", JSON.stringify(students));
+        try {
+
+    localStorage.setItem("students", JSON.stringify(students));
+
+} catch (error) {
+
+    alert("Error saving student data!");
+
+}
 
         alert("Student Registered Successfully!");
 
@@ -42,3 +45,16 @@ if (studentForm) {
     });
 
 }
+window.onload = function () {
+
+    setTimeout(function () {
+
+        const loader = document.getElementById("loader");
+
+        if (loader) {
+            loader.style.display = "none";
+        }
+
+    }, 1500);
+
+};

@@ -15,6 +15,10 @@
 </head>
 
 <body class="bg-gray-100">
+    <div id="loader"
+     class="fixed inset-0 bg-white flex items-center justify-center z-50">
+    <h1 class="text-3xl font-bold text-blue-700">Loading...</h1>
+</div>
 
 <div class="flex min-h-screen">
 
@@ -50,36 +54,36 @@
             Student Registration Form
         </h1>
 
-        <form class="bg-white shadow-lg rounded-xl p-8">
+        <form id="studentForm" class="bg-white shadow-lg rounded-xl p-8">
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <input type="text" placeholder="First Name" class="border p-3 rounded-lg">
+                <input type="text" id="studentName" placeholder="First Name" class="border p-3 rounded-lg">
 
                 <input type="text" placeholder="Last Name" class="border p-3 rounded-lg">
 
-                <input type="email" placeholder="Email" class="border p-3 rounded-lg">
+                <input type="email" id="studentEmail" placeholder="Email" class="border p-3 rounded-lg">
 
                 <input type="tel" placeholder="Phone Number" class="border p-3 rounded-lg">
 
                 <input type="date" class="border p-3 rounded-lg">
 
-                <select class="border p-3 rounded-lg">
-                    <option>Select Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                </select>
+                <select id="studentGender" class="border p-3 rounded-lg">
+    <option>Select Gender</option>
+    <option>Male</option>
+    <option>Female</option>
+</select>
 
-                <input type="text" placeholder="College Name" class="border p-3 rounded-lg">
+<input type="text" placeholder="College Name" class="border p-3 rounded-lg">
 
-                <input type="text" placeholder="University" class="border p-3 rounded-lg">
+<input type="text" placeholder="University" class="border p-3 rounded-lg">
 
-                <select class="border p-3 rounded-lg">
-                    <option>Select Course</option>
-                    <option>BCA</option>
-                    <option>MCA</option>
-                    <option>B.Tech</option>
-                </select>
+<select id="studentCourse" class="border p-3 rounded-lg">
+    <option>Select Course</option>
+    <option>BCA</option>
+    <option>MCA</option>
+    <option>B.Tech</option>
+</select>
 
                 <input type="text" placeholder="Department" class="border p-3 rounded-lg">
 
@@ -110,9 +114,10 @@
 
             <div class="flex gap-4 mt-8">
 
-                <button class="bg-blue-700 text-white px-8 py-3 rounded-lg hover:bg-blue-900">
-                    Register Student
-                </button>
+                <button type="submit"
+    class="bg-blue-700 text-white px-8 py-3 rounded-lg hover:bg-blue-900">
+    Register Student
+</button>
 
                 <button type="reset"
                     class="bg-red-500 text-white px-8 py-3 rounded-lg hover:bg-red-700">
@@ -126,6 +131,8 @@
     </main>
 
 </div>
-
+<script src="js/app.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/students.js"></script>
 </body>
 </html>

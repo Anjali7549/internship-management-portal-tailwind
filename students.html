@@ -48,93 +48,134 @@
     <main class="flex-1">
 
         <!-- Header -->
-        <header class="bg-white shadow p-5 flex justify-between items-center">
+        <header class="bg-white shadow flex justify-between items-center p-5">
 
-            <h1 class="text-3xl font-bold text-blue-900">
-                Student Management
-            </h1>
+    <h1 class="text-3xl font-bold text-blue-900">
+        Students
+    </h1>
 
-            <button class="bg-blue-700 text-white px-5 py-2 rounded-lg hover:bg-blue-900">
-                + Add Student
-            </button>
+    <div class="flex gap-3">
 
-        </header>
+        <input
+            type="text"
+            id="searchStudent"
+            placeholder="Search Student..."
+            class="border rounded-lg px-4 py-2">
+
+        <select id="statusFilter"
+                class="border rounded-lg px-4 py-2">
+
+            <option value="all">All Students</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="pending">Pending</option>
+
+        </select>
+
+    </div>
+
+</header>
 
         <section class="p-8">
 
-            <!-- Search -->
+<div class="flex flex-col md:flex-row gap-4 mb-6">
 
-            <div class="flex flex-col md:flex-row justify-between mb-6 gap-4">
+    <select id="sortStudents" class="border rounded-lg px-4 py-2">
+        <option value="">Sort By</option>
+        <option value="name">Name</option>
+    </select>
 
-                <input
-                    type="text"
-                    placeholder="Search Student..."
-                    class="border rounded-lg p-3 w-full md:w-80">
-
-            </div>
+</div>
 
             <!-- Table -->
 
             <div class="overflow-x-auto bg-white rounded-xl shadow">
 
-                <table class="min-w-full">
+                <table id="studentTable" class="min-w-full">
 
                     <thead class="bg-blue-900 text-white">
 
                         <tr>
 
-                            <th class="py-3 px-4">ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Course</th>
-                            <th>Status</th>
+    <th class="py-3 px-4">ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Course</th>
+    <th>Status</th>
+    <th>Action</th>
 
-                        </tr>
-
+</tr>
                     </thead>
 
                     <tbody>
 
                         <tr class="border hover:bg-gray-100">
-                            <td class="py-3 px-4">1</td>
-                            <td>Anjali Kumari</td>
-                            <td>anjali@gmail.com</td>
-                            <td>MCA</td>
-                            <td class="text-green-600 font-semibold">Active</td>
-                        </tr>
+    <tbody>
 
-                        <tr class="border hover:bg-gray-100">
-                            <td class="py-3 px-4">2</td>
-                            <td>Rahul Kumar</td>
-                            <td>rahul@gmail.com</td>
-                            <td>BCA</td>
-                            <td class="text-red-600 font-semibold">Inactive</td>
-                        </tr>
+<tr class="border hover:bg-gray-100">
+    <td class="py-3 px-4">1</td>
+    <td>Anjali Kumari</td>
+    <td>anjali@gmail.com</td>
+    <td>MCA</td>
+    <td class="text-green-600 font-semibold">Active</td>
+    <td>
+        <button class="deleteBtn bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+            Delete
+        </button>
+    </td>
+</tr>
 
-                        <tr class="border hover:bg-gray-100">
-                            <td class="py-3 px-4">3</td>
-                            <td>Priya Singh</td>
-                            <td>priya@gmail.com</td>
-                            <td>B.Tech</td>
-                            <td class="text-green-600 font-semibold">Active</td>
-                        </tr>
+<tr class="border hover:bg-gray-100">
+    <td class="py-3 px-4">2</td>
+    <td>Rahul Kumar</td>
+    <td>rahul@gmail.com</td>
+    <td>BCA</td>
+    <td class="text-red-600 font-semibold">Inactive</td>
+    <td>
+        <button class="deleteBtn bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+            Delete
+        </button>
+    </td>
+</tr>
 
-                        <tr class="border hover:bg-gray-100">
-                            <td class="py-3 px-4">4</td>
-                            <td>Amit Sharma</td>
-                            <td>amit@gmail.com</td>
-                            <td>MCA</td>
-                            <td class="text-green-600 font-semibold">Active</td>
-                        </tr>
+<tr class="border hover:bg-gray-100">
+    <td class="py-3 px-4">3</td>
+    <td>Priya Singh</td>
+    <td>priya@gmail.com</td>
+    <td>B.Tech</td>
+    <td class="text-green-600 font-semibold">Active</td>
+    <td>
+        <button class="deleteBtn bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+            Delete
+        </button>
+    </td>
+</tr>
 
-                        <tr class="border hover:bg-gray-100">
-                            <td class="py-3 px-4">5</td>
-                            <td>Neha Gupta</td>
-                            <td>neha@gmail.com</td>
-                            <td>BCA</td>
-                            <td class="text-yellow-600 font-semibold">Pending</td>
-                        </tr>
+<tr class="border hover:bg-gray-100">
+    <td class="py-3 px-4">4</td>
+    <td>Amit Sharma</td>
+    <td>amit@gmail.com</td>
+    <td>MCA</td>
+    <td class="text-green-600 font-semibold">Active</td>
+    <td>
+        <button class="deleteBtn bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+            Delete
+        </button>
+    </td>
+</tr>
 
+<tr class="border hover:bg-gray-100">
+    <td class="py-3 px-4">5</td>
+    <td>Neha Gupta</td>
+    <td>neha@gmail.com</td>
+    <td>BCA</td>
+    <td class="text-yellow-600 font-semibold">Pending</td>
+    <td>
+        <button class="deleteBtn bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+            Delete
+        </button>
+    </td>
+</tr>
                     </tbody>
 
                 </table>
@@ -146,6 +187,7 @@
     </main>
 
 </div>
-
+<script src="js/students.js"></script>
+<script src="js/validation.js"></script>
 </body>
 </html>
