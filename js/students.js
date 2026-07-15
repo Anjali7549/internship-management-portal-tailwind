@@ -105,3 +105,31 @@ if (sortStudents) {
     });
 
 }
+// ==========================
+// Student Status Filter
+// ==========================
+
+const statusFilter = document.getElementById("statusFilter");
+
+if (statusFilter) {
+
+    statusFilter.addEventListener("change", function () {
+
+        const rows = document.querySelectorAll("#studentTable tbody tr");
+
+        rows.forEach(function (row) {
+
+            const status = row.cells[4].innerText.toLowerCase();
+            const selected = statusFilter.value;
+
+            if (selected === "all" || status.includes(selected)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+
+        });
+
+    });
+
+}
