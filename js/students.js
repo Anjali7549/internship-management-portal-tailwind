@@ -266,3 +266,4 @@ document.getElementById("prevBtn").addEventListener("click", function () {
     }
 
 });
+// Updated student management functionality
