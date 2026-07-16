@@ -1,135 +1,268 @@
-// ============================
-// Student Search
-// ============================
+// ==========================
+// DummyJSON API
+// ==========================
 
-const searchStudent = document.getElementById("searchStudent");
+const API_URL = "https://dummyjson.com/users?limit=100";
 
-if (searchStudent) {
-    searchStudent.addEventListener("keyup", function () {
+let students = [];
+let filteredStudents = [];
 
-        const searchText = this.value.toLowerCase();
+let currentPage = 1;
+const rowsPerPage = 10;
 
-        const rows = document.querySelectorAll("#studentTable tbody tr");
+// Elements
+const studentBody = document.getElementById("studentBody");
+const loading = document.getElementById("loading");
+const error = document.getElementById("error");
 
-        rows.forEach(function (row) {
+// ==========================
+// Load Students
+// ==========================
 
-            const text = row.innerText.toLowerCase();
+async function loadStudents() {
 
-            if (text.includes(searchText)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
+    loading.classList.remove("hidden");
+    error.classList.add("hidden");
 
-        });
+    try {
 
-    });
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch students");
+        }
+
+        const data = await response.json();
+
+        // Add fake status
+        students = data.users.map((student, index) => ({
+
+            id: student.id,
+            name: student.firstName + " " + student.lastName,
+            email: student.email,
+            department: student.company.department,
+
+            status:
+                index % 3 === 0
+                    ? "Active"
+                    : index % 3 === 1
+                    ? "Inactive"
+                    : "Pending"
+
+        }));
+
+        filteredStudents = [...students];
+
+        displayStudents();
+
+    }
+
+    catch (err) {
+
+        error.classList.remove("hidden");
+        error.innerHTML = "Unable to load student data.";
+
+        console.log(err);
+
+    }
+
+    finally {
+
+        loading.classList.add("hidden");
+
+    }
+
 }
+
 // ==========================
-// Delete Student
+// Display Students
 // ==========================
 
-const deleteButtons = document.querySelectorAll(".deleteBtn");
+function displayStudents() {
 
-deleteButtons.forEach(button => {
+    studentBody.innerHTML = "";
 
-    button.addEventListener("click", function () {
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
 
-        if (confirm("Delete this student?")) {
+    const pageStudents = filteredStudents.slice(start, end);
 
-            this.closest("tr").remove();
+    pageStudents.forEach(student => {
 
-            alert("Student Deleted Successfully!");
+        let color = "text-green-600";
+
+        if (student.status === "Inactive") {
+
+            color = "text-red-600";
 
         }
 
+        if (student.status === "Pending") {
+
+            color = "text-yellow-600";
+
+        }
+
+        studentBody.innerHTML += `
+
+<tr class="border hover:bg-gray-100">
+
+<td class="py-3 px-4">${student.id}</td>
+
+<td>${student.name}</td>
+
+<td>${student.email}</td>
+
+<td>${student.department}</td>
+
+<td class="${color} font-semibold">${student.status}</td>
+
+<td>
+
+<button
+class="deleteBtn bg-red-600 text-white px-3 py-1 rounded">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
     });
 
+    document.getElementById("pageInfo").innerText =
+        `Page ${currentPage}`;
+
+}
+
+loadStudents();
+// ==========================
+// Search Students
+// ==========================
+
+document.getElementById("searchStudent").addEventListener("keyup", function () {
+
+    const value = this.value.toLowerCase();
+
+    filteredStudents = students.filter(student =>
+        student.name.toLowerCase().includes(value)
+    );
+
+    currentPage = 1;
+    displayStudents();
+
 });
+
 // ==========================
 // Filter Students
 // ==========================
 
-const statusFilter = document.getElementById("statusFilter");
+document.getElementById("statusFilter").addEventListener("change", function () {
 
-if (statusFilter) {
+    const value = this.value.toLowerCase();
 
-    statusFilter.addEventListener("change", function () {
+    if (value === "all") {
 
-        const value = this.value.toLowerCase();
+        filteredStudents = [...students];
 
-        const rows = document.querySelectorAll("#studentTable tbody tr");
+    } else {
 
-        rows.forEach(function (row) {
+        filteredStudents = students.filter(student =>
+            student.status.toLowerCase() === value
+        );
 
-            const status = row.children[4].innerText.toLowerCase();
+    }
 
-            if (value === "all" || status.includes(value)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
+    currentPage = 1;
+    displayStudents();
 
-        });
+});
 
-    });
-
-}
 // ==========================
-// Sort Students
+// Sort Students A-Z
 // ==========================
 
-const sortStudents = document.getElementById("sortStudents");
+document.getElementById("sortBtn").addEventListener("click", function () {
 
-if (sortStudents) {
+    filteredStudents.sort((a, b) =>
+        a.name.localeCompare(b.name)
+    );
 
-    sortStudents.addEventListener("change", function () {
+    displayStudents();
 
-        const tbody = document.querySelector("#studentTable tbody");
+});
 
-        const rows = Array.from(tbody.querySelectorAll("tr"));
-
-        rows.sort(function (a, b) {
-
-            const nameA = a.children[1].innerText.toLowerCase();
-            const nameB = b.children[1].innerText.toLowerCase();
-
-            return nameA.localeCompare(nameB);
-
-        });
-
-        rows.forEach(function (row) {
-            tbody.appendChild(row);
-        });
-
-    });
-
-}
 // ==========================
-// Student Status Filter
+// Delete Student
 // ==========================
 
-const statusFilter = document.getElementById("statusFilter");
+studentBody.addEventListener("click", function (e) {
 
-if (statusFilter) {
+    if (e.target.classList.contains("deleteBtn")) {
 
-    statusFilter.addEventListener("change", function () {
+        if (!confirm("Delete this student?")) return;
 
-        const rows = document.querySelectorAll("#studentTable tbody tr");
+        const row = e.target.closest("tr");
+        const id = Number(row.cells[0].innerText);
 
-        rows.forEach(function (row) {
+        students = students.filter(student => student.id !== id);
+        filteredStudents = filteredStudents.filter(student => student.id !== id);
 
-            const status = row.cells[4].innerText.toLowerCase();
-            const selected = statusFilter.value;
+        displayStudents();
 
-            if (selected === "all" || status.includes(selected)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
+    }
 
-        });
+});
 
-    });
+// ==========================
+// Export JSON
+// ==========================
 
-}
+document.getElementById("exportBtn").addEventListener("click", function () {
+
+    const blob = new Blob(
+        [JSON.stringify(filteredStudents, null, 2)],
+        { type: "application/json" }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = "students.json";
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+});
+
+// ==========================
+// Pagination
+// ==========================
+
+document.getElementById("nextBtn").addEventListener("click", function () {
+
+    if (currentPage * rowsPerPage < filteredStudents.length) {
+
+        currentPage++;
+        displayStudents();
+
+    }
+
+});
+
+document.getElementById("prevBtn").addEventListener("click", function () {
+
+    if (currentPage > 1) {
+
+        currentPage--;
+        displayStudents();
+
+    }
+
+});
