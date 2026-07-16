@@ -1,34 +1,64 @@
-const API = {
-  // Fetch Students
-  async getStudents() {
-    const response = await fetch("https://dummyjson.com/users");
+// ===============================
+// Custom API Service Layer
+// ===============================
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch students");
+async function fetchAPI(url) {
+
+    try {
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+
+            throw new Error("API Request Failed");
+
+        }
+
+        const data = await response.json();
+
+        return data;
+
     }
 
-    return await response.json();
-  },
+    catch(error) {
 
-  // Fetch Reports
-  async getReports() {
-    const response = await fetch("https://dummyjson.com/posts");
+        console.log("API Error:", error);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch reports");
+        throw error;
+
     }
 
-    return await response.json();
-  },
+}
 
-  // Fetch Profile
-  async getProfile() {
-    const response = await fetch("https://dummyjson.com/users/1");
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch profile");
-    }
+// Students API
 
-    return await response.json();
-  }
-};
+async function getStudents(){
+
+    return await fetchAPI(
+        "https://dummyjson.com/users?limit=100"
+    );
+
+}
+
+
+// Reports API
+
+async function getReports(){
+
+    return await fetchAPI(
+        "https://dummyjson.com/posts?limit=10"
+    );
+
+}
+
+
+// User API
+
+async function getUser(){
+
+    return await fetchAPI(
+        "https://dummyjson.com/users/1"
+    );
+
+}
