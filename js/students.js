@@ -266,3 +266,4 @@ document.getElementById("prevBtn").addEventListener("click", function () {
     }
 
 });
+// Student search and filter functionality implemented
