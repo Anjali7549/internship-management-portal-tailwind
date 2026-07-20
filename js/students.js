@@ -172,12 +172,18 @@ Edit
 
 </button>
 
-<button
-class="deleteBtn bg-red-600 text-white px-3 py-1 rounded">
+<td>
 
-Delete
-
+${user.role == "admin"
+? `
+<button class="editBtn bg-blue-600 text-white px-3 py-1 rounded mr-2">
+Edit
 </button>
+
+<button class="deleteBtn bg-red-600 text-white px-3 py-1 rounded">
+Delete
+</button>
+`
 : `<span class="text-blue-600 font-semibold">View Only</span>`}
 
 </td>
@@ -256,23 +262,44 @@ document.getElementById("sortBtn").addEventListener("click", function () {
 
 studentBody.addEventListener("click", function (e) {
 
-     if (e.target.classList.contains("editBtn")) {
+    var row = e.target.closest("tr");
 
-        alert("Edit feature coming soon");
+    var id = Number(row.cells[0].innerText);
 
+    // Edit
+    if (e.target.classList.contains("editBtn")) {
+
+        var student = students.find(function (item) {
+            return item.id == id;
+        });
+
+        localStorage.setItem("editStudent", JSON.stringify(student));
+
+        window.location.href = "register.html";
     }
-        const row = e.target.closest("tr");
-        const id = Number(row.cells[0].innerText);
 
-        students = students.filter(student => student.id !== id);
-        filteredStudents = filteredStudents.filter(student => student.id !== id);
+    // Delete
+    if (e.target.classList.contains("deleteBtn")) {
+
+        if (!confirm("Delete this student?")) {
+            return;
+        }
+
+        students = students.filter(function (item) {
+            return item.id != id;
+        });
+
+        filteredStudents = [...students];
+
+        localStorage.setItem("students", JSON.stringify(students));
 
         displayStudents();
+
+        showToast("Student deleted successfully.");
 
     }
 
 });
-
 // ==========================
 // Export JSON
 // ==========================

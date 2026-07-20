@@ -1,3 +1,25 @@
+// ==========================
+// Load student for editing
+// ==========================
+
+window.addEventListener("load", function () {
+
+    var editStudent = JSON.parse(localStorage.getItem("editStudent"));
+
+    if (editStudent) {
+
+        document.getElementById("studentName").value = editStudent.name;
+        document.getElementById("studentEmail").value = editStudent.email;
+        document.getElementById("studentPhone").value = editStudent.phone;
+        document.getElementById("studentCourse").value = editStudent.course;
+        document.getElementById("studentGender").value = editStudent.gender;
+        document.getElementById("studentDepartment").value = editStudent.department;
+
+        document.getElementById("editIndex").value = editStudent.id;
+
+    }
+
+});
 function validateForm(name, email, course) {
 
     if (name.trim() === "") {
@@ -50,11 +72,55 @@ studentForm.addEventListener("submit", function (event) {
         status: "Active"
     };
 
+   var editIndex = document.getElementById("editIndex").value;
+
+if (editIndex === "") {
+
+    var editId = document.getElementById("editIndex").value;
+
+if (editId == "") {
+
     students.push(student);
 
-    localStorage.setItem("students", JSON.stringify(students));
+} else {
 
-    alert("Student Registered Successfully");
+    for (var i = 0; i < students.length; i++) {
+
+        if (students[i].id == editId) {
+
+            student.id = Number(editId);
+
+            students[i] = student;
+
+            break;
+
+        }
+
+    }
+
+    localStorage.removeItem("editStudent");
+
+}
+
+localStorage.setItem("students", JSON.stringify(students));
+
+alert("Student Saved Successfully");
+
+studentForm.reset();
+
+document.getElementById("editIndex").value = "";
+
+} else {
+
+    students[editIndex] = student;
+
+}
+
+localStorage.setItem("students", JSON.stringify(students));
+
+alert("Student Saved Successfully");
+
+document.getElementById("editIndex").value = "";
 
     studentForm.reset();
 
