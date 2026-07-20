@@ -109,3 +109,20 @@ async function loadDashboard() {
 }
 
 loadDashboard();
+// Logout Button
+
+var logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", function () {
+
+        localStorage.removeItem("loggedInUser");
+
+        alert("You have logged out.");
+
+        window.location.href = "login.html";
+
+    });
+
+}
