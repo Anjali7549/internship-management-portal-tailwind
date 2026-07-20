@@ -348,7 +348,8 @@ document.getElementById("prevBtn").addEventListener("click", function () {
     }
 
 });
-// Updated student management functionality
+// Student search and filter functionality implemented
+
 // ==========================
 // Import JSON
 // ==========================
@@ -365,23 +366,29 @@ document.getElementById("importFile").addEventListener("change", function () {
 
     reader.onload = function (event) {
 
-    try {
+        try {
 
-        var data = JSON.parse(event.target.result);
+            var data = JSON.parse(event.target.result);
 
-        students = data;
-        filteredStudents = data;
+            students = data;
+            filteredStudents = data;
 
-        currentPage = 1;
+            localStorage.setItem("students", JSON.stringify(data));
 
-        displayStudents();
+            currentPage = 1;
 
-        showToast("Student data imported successfully.");
+            displayStudents();
 
-    } catch (error) {
+            showToast("Student data imported successfully.");
 
-        showToast("Invalid JSON file.");
+        } catch (error) {
 
-    }
+            showToast("Invalid JSON file.");
 
-};
+        }
+
+    };
+
+    reader.readAsText(file);
+
+});

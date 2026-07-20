@@ -109,8 +109,10 @@ async function loadDashboard() {
 }
 
 loadDashboard();
-// Logout Button
 
+// Dynamic dashboard analytics implemented
+
+// Logout Button
 var logoutBtn = document.getElementById("logoutBtn");
 
 if (logoutBtn) {
