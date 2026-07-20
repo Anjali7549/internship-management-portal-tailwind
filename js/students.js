@@ -1,3 +1,35 @@
+function showToast(message) {
+
+    var toast = document.getElementById("toast");
+
+    toast.innerHTML = message;
+
+    toast.classList.remove("hidden");
+
+    setTimeout(function () {
+
+        toast.classList.add("hidden");
+
+    }, 3000);
+
+}
+// Check login user
+
+var user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+if (user != null) {
+
+    if (user.role == "student") {
+
+        var registerMenu = document.getElementById("registerMenu");
+
+        if (registerMenu) {
+            registerMenu.style.display = "none";
+        }
+
+    }
+
+}
 // ==========================
 // DummyJSON API
 // ==========================
@@ -20,7 +52,20 @@ const error = document.getElementById("error");
 // ==========================
 
 async function loadStudents() {
+// Check localStorage first
 
+var localStudents = JSON.parse(localStorage.getItem("students"));
+
+if (localStudents && localStudents.length > 0) {
+
+    students = localStudents;
+    filteredStudents = [...students];
+
+    displayStudents();
+
+    return;
+
+}
     loading.classList.remove("hidden");
     error.classList.add("hidden");
 
@@ -119,12 +164,27 @@ function displayStudents() {
 
 <td>
 
+${user.role == "admin"
 <button
-class="deleteBtn bg-red-600 text-white px-3 py-1 rounded">
+class="editBtn bg-blue-600 text-white px-3 py-1 rounded mr-2">
 
-Delete
+Edit
 
 </button>
+
+<td>
+
+${user.role == "admin"
+? `
+<button class="editBtn bg-blue-600 text-white px-3 py-1 rounded mr-2">
+Edit
+</button>
+
+<button class="deleteBtn bg-red-600 text-white px-3 py-1 rounded">
+Delete
+</button>
+`
+: `<span class="text-blue-600 font-semibold">View Only</span>`}
 
 </td>
 
@@ -202,22 +262,44 @@ document.getElementById("sortBtn").addEventListener("click", function () {
 
 studentBody.addEventListener("click", function (e) {
 
+    var row = e.target.closest("tr");
+
+    var id = Number(row.cells[0].innerText);
+
+    // Edit
+    if (e.target.classList.contains("editBtn")) {
+
+        var student = students.find(function (item) {
+            return item.id == id;
+        });
+
+        localStorage.setItem("editStudent", JSON.stringify(student));
+
+        window.location.href = "register.html";
+    }
+
+    // Delete
     if (e.target.classList.contains("deleteBtn")) {
 
-        if (!confirm("Delete this student?")) return;
+        if (!confirm("Delete this student?")) {
+            return;
+        }
 
-        const row = e.target.closest("tr");
-        const id = Number(row.cells[0].innerText);
+        students = students.filter(function (item) {
+            return item.id != id;
+        });
 
-        students = students.filter(student => student.id !== id);
-        filteredStudents = filteredStudents.filter(student => student.id !== id);
+        filteredStudents = [...students];
+
+        localStorage.setItem("students", JSON.stringify(students));
 
         displayStudents();
+
+        showToast("Student deleted successfully.");
 
     }
 
 });
-
 // ==========================
 // Export JSON
 // ==========================
@@ -267,3 +349,46 @@ document.getElementById("prevBtn").addEventListener("click", function () {
 
 });
 // Student search and filter functionality implemented
+
+// ==========================
+// Import JSON
+// ==========================
+
+document.getElementById("importFile").addEventListener("change", function () {
+
+    var file = this.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+
+        try {
+
+            var data = JSON.parse(event.target.result);
+
+            students = data;
+            filteredStudents = data;
+
+            localStorage.setItem("students", JSON.stringify(data));
+
+            currentPage = 1;
+
+            displayStudents();
+
+            showToast("Student data imported successfully.");
+
+        } catch (error) {
+
+            showToast("Invalid JSON file.");
+
+        }
+
+    };
+
+    reader.readAsText(file);
+
+});
